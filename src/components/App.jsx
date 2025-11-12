@@ -25,10 +25,18 @@ export class App extends Component {
     if (isDuplicate) {
       alert (`${name} is alredy in contacts.`)
     }
-    
+
     const newContact = { id: nanoid(), name, number };
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
+    }));
+  };
+
+  // видалення контакту
+  deleteContact = (contactId) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact =>
+        contact.id !== contactId),
     }));
   };
 
