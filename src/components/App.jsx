@@ -16,6 +16,16 @@ export class App extends Component {
   };
 
   addContact = (name, number) => {
+    const { contacts } = this.state;
+
+    // перевірка на дублі
+    const isDuplicate = contacts.some(
+      contact => contact.name.toLowerCase() === name.toLowerCase()
+    );
+    if (isDuplicate) {
+      alert (`${name} is alredy in contacts.`)
+    }
+    
     const newContact = { id: nanoid(), name, number };
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
