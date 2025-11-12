@@ -1,13 +1,13 @@
 import React from "react";
-export default class ContactList extends React.Component {
-    render() {
-        const { contacts } = this.props;
-        return ( 
-            <ul>
-                {contacts.map((contact) => (
-                    <li key={contact.id}>{contact.name}: {contact.number}</li>
-                ))}
-            </ul>
-            );
-        }
-    }
+import ContactItem from "../ContactItem/ContactItem";
+
+const ContactList = ({ contacts }) => (
+    <ul>
+        {contacts.map(({ id, name, number }) =>
+        (
+            <ContactItem key={id} name={name} number={number} />
+        ))}
+    </ul>
+);
+
+export default ContactList;
