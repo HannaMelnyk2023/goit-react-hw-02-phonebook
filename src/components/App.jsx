@@ -7,34 +7,39 @@ export class App extends Component {
   state = {
     contacts: [],
     name: '',
+    number: '',
   };
   // оновлення name при введенні
 
   handleChange = event => {
-    this.setState({ name: event.target.value });
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
   // новий контакт
   handleSubmit = event => {
     event.preventDefault();
-    const { name, contacts } = this.state;
+    const { name, number, contacts } = this.state;
     // пропуск пустих імен:
     if (name.trim() === '') return;
     const newContact = {
       id: nanoid(),
-      name: name,
+      name: name.trim(),
+      number: number.trim(),
     };
     this.setState({
       contacts: [...contacts, newContact],
-      name: '', //очистимо інпут
+      name: '',
+      number: '',//очистимо інпут
     });
   };
   render() {
-    const { contacts, name } = this.state;
+    const { contacts, name, number } = this.state;
     return (
       <div style={{ margin: '20px' }}>
         <h1>Phonebook</h1>
         <ContactForm
           name={name}
+          number={number}
           onChange={this.handleChange}
           onSubmit={this.handleSubmit}
         />

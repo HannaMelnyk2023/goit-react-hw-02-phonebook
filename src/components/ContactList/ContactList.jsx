@@ -5,7 +5,7 @@ export default class ContactList extends React.Component {
         return ( 
             <ul>
                 {contacts.map((contact) => (
-                    <li key={contact.id}>{contact.name}</li>
+                    <li key={contact.id}>{contact.name}: {contact.number}</li>
                 ))}
             </ul>
             );
