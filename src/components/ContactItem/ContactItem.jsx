@@ -4,7 +4,7 @@ import React from "react";
 const ContactItem = ({ id, name, number, onDeleteContact }) =>
 (
     <li>
-        {name}:{number}
+        {name}:{" "}{number}{" "}
         <button onClick = {() => onDeleteContact(id)}>Delete</button>
     </li>
 );
