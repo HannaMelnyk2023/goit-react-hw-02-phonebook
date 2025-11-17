@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 
 export default class ContactForm extends Component {
   state = {
-    name: "",
-    number: "",
-  }
+    name: '',
+    number: '',
+  };
 
-// оновлення name при введенні
+  // оновлення name при введенні
 
   handleChange = event => {
     const { name, value } = event.target;
@@ -31,7 +31,7 @@ export default class ContactForm extends Component {
             name="name"
             value={name}
             onChange={this.handleChange}
-            required
+            // required
           />
         </label>
         <label>
@@ -41,7 +41,7 @@ export default class ContactForm extends Component {
             name="number"
             value={number}
             onChange={this.handleChange}
-            required
+            // required
           />
         </label>
         <button type="submit">Add contact</button>

@@ -17,13 +17,19 @@ export class App extends Component {
 
   addContact = (name, number) => {
     const { contacts } = this.state;
+    // перевірка на порожнечу
+    if (!name.trim() || !number.trim()) {
+      // alert('Будь ласка, будьте лапочкою, заповніть усі поля');
+      return;
+    }
 
     // перевірка на дублі
     const isDuplicate = contacts.some(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
     if (isDuplicate) {
-      alert (`${name} is alredy in contacts.`)
+      alert(`${name} is alredy in contacts.`);
+      return;
     }
 
     const newContact = { id: nanoid(), name, number };
@@ -33,10 +39,9 @@ export class App extends Component {
   };
 
   // видалення контакту
-  deleteContact = (contactId) => {
+  deleteContact = contactId => {
     this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact =>
-        contact.id !== contactId),
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
     }));
   };
 
@@ -73,8 +78,8 @@ export class App extends Component {
   getFilterContacts = () => {
     const { contacts, filter } = this.state;
     const normalizedFilter = filter.toLowerCase();
-    return contacts.filter(contacts =>
-      contacts.name.toLowerCase().includes(normalizedFilter)
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
     );
   };
 
@@ -82,12 +87,17 @@ export class App extends Component {
     const { filter } = this.state;
     const filteredContacts = this.getFilterContacts();
     return (
-      <div style={{ margin: '20px' }}>
+      <div> 
         <h1>Phonebook</h1>
-        <ContactForm onAddContact={this.addContact} />
+        <ContactForm
+          onAddContact={this.addContact} />
         <h2>Contacts</h2>
-        <Filter value={filter} onChange={this.handleFilterChange} />
-        <ContactList contacts={filteredContacts} />
+        <Filter value={filter}
+          onChange={this.handleFilterChange} />
+        <ContactList
+          contacts={filteredContacts}
+          onDeleteContact={this.deleteContact}
+        />
       </div>
     );
   }
